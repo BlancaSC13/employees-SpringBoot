@@ -1,0 +1,44 @@
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+*.iws
+
+# Compiled class files
+/out/
+/target/
+/bin/
+
+# Logs
+/logs/
+*.log
+
+# Temporary files
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Maven / Gradle
+.mvn/
+.gradle/
+*.jar
+*.war
+*.ear
+
+# Spring Boot specific
+.env
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+
+# Generated files
+/hs_err_pid*
+/reports/
+
+# Database files
+*.h2.db
+*.mv.db
+*.db.lock
