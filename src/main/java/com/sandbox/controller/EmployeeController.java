@@ -14,8 +14,9 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-
-@Controller
+@RestController //change in case you want to test the monolithic app
+@RequestMapping(path = "/api/employee")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 
     @Autowired
@@ -36,11 +37,23 @@ public class EmployeeController {
     }
 
     //TODO: test this with DeleteMapping
-    @GetMapping("/deleteEmployee/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") long id) {
+    @PostMapping ("/deleteEmployee")
+    public void deleteEmployeeById(@RequestParam("employeeId") long employeeId) {
+        employeeService.deleteEmployeeById(employeeId);
+    }
 
-        employeeService.deleteEmployeeById(id);
-        return "redirect:/";
+    @GetMapping("/getAllEmployee")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
+
+
+    @GetMapping("/showNewEmployeeForm")
+    public String showNewEmployeeForm(Model model) {
+        //create model attribute to bind form data
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+        return "new_employee";
     }
 
     @GetMapping("/showFormUpdate/{id}")
@@ -51,14 +64,6 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
         //set employee as a model attribute to populate the form
         return "update_employee";
-    }
-
-    @GetMapping("/showNewEmployeeForm/{id}")
-    public String showNewEmployeeForm(Model model) {
-        //create model attribute to bind form data
-        Employee employee = new Employee();
-        model.addAttribute("employee", employee);
-        return "new_employee";
     }
 
     @GetMapping("/page/{pageNo}")
@@ -82,4 +87,5 @@ public class EmployeeController {
         model.addAttribute("listEmployees", listEmployees);
         return "index";
     }
+
 }

@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Employees")
-public class Employee {
+public class Employee { // parte del modelo entities, en MVC.
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -67,4 +68,8 @@ public class Employee {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
+
 }
+
